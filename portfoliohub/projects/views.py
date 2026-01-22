@@ -7,4 +7,10 @@ def project_list(request):
         'projects': projects
         })
 
+def project_detail(request, slug):
+    project = Project.objects.get(slug=slug)
+    return render(request, 'projects/project_detail.html', {
+        'project': project
+        })
+
 

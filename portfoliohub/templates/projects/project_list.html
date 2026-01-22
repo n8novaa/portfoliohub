@@ -9,19 +9,26 @@
     <h1>Projects</h1>
 
     {% for project in projects %}
+
     <div>
-        <h2>{{ project.title }}</h2>
+        <h2><a href="{% url 'project_detail' project.slug %}">
+            {{ project.title }}
+        </a></h2>
         <p>{{  project.short_description }}</p>
         <p><strong>Tech:</strong> {{ project.tech_stack }}</p>
         <a href = "{{ project.github_url }}">Github</a>
+
         {% if project.live_url %}
             <a href = "{{ project.live_url }}">Live</a>
         {% endif %}
+
     </div>
     <hr>
+
     {% empty %}
         <p>No projects added yet.</p>
+
     {% endfor %}
-    
+
 </body>
 </html>
