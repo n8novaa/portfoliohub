@@ -3,10 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
+    <title>{{profile.full_name}}</title>
 </head>
 <body>
-    <h1>Basil K Paul</h1>
-    <p>Django Developer | backend Engineer</p>
+    <h1>{{profile.full_name}}</h1>
+    <h3>{{profile.headline}}</h3>
+
+    <p>{{profile.bio}}</p>
+
+    <h4>Skills</h4>
+    <p>{{profile.skills}}</p>
+
+    <h4>Connect</h4>
+    <ul>
+        <li><a href="mailto:{{profile.email}}">Email</a></li>
+        <li><a href="{{profile.github_url}}">Github</a></li>
+        <li><a href="{{profile.linkedin_url}}">LinkedIn</a></li>
+    </ul>
+    
 </body>
 </html>
