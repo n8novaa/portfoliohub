@@ -10,21 +10,22 @@
 <body>
 
     <!-- NAVBAR (GLOBAL) -->
-    <nav class="nav">
+<nav class="nav">
     <div class="nav-brand">
-        <a href="/#hero">Portfolio</a>
+        <a href="{% url 'home' %}#hero">Portfolio</a>
     </div>
 
     <div class="nav-links">
-        <a href="/#hero">Home</a>
-        <a href="/#about">About</a>
-        <a href="/#skills">Skills</a>
-        <a href="/#projects">Projects</a>
-        <a href="/#experience">Experience</a>
-        <a href="/#education">Education</a>
-        <a href="/#connect">Connect</a>
+        <a href="{% url 'home' %}#hero">Home</a>
+        <a href="{% url 'about' %}">About</a>
+        <a href="{% url 'home' %}#skills">Skills</a>
+        <a href="{% url 'home' %}#projects">Projects</a>
+        <a href="{% url 'home' %}#experience">Experience</a>
+        <a href="{% url 'home' %}#education">Education</a>
+        <a href="{% url 'home' %}#connect">Connect</a>
     </div>
 </nav>
+
 
 
     <hr>

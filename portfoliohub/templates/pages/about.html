@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}About | Portfolio{% endblock %}
+
+{% block content %}
+<section id="about-page">
+    <h1>About Me</h1>
+
+    {% if profile %}
+        <p>{{ profile.bio }}</p>
+    {% else %}
+        <p>About information not available.</p>
+    {% endif %}
+</section>
+{% endblock %}

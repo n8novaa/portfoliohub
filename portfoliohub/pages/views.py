@@ -12,3 +12,10 @@ def home(request):
         'profile': profile,
         'featured_projects' : featured_projects
         })
+
+def about(request):
+    profile = Profile.objects.first()
+    return render(request, 'pages/about.html',{
+        "profile": profile
+    })
+
