@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Education | Portfolio{% endblock %}
+
+{% block content %}
+<section id="education-page">
+    <h1>Education</h1>
+
+    {% if education_list %}
+        {% for edu in education_list %}
+            <article>
+                <h2>{{ edu.degree }}</h2>
+                <p><strong>{{ edu.institution }}</strong></p>
+                <p>{{ edu.start_year }} – {{ edu.end_year }}</p>
+            </article>
+        {% endfor %}
+    {% else %}
+        <p>No education details added yet.</p>
+    {% endif %}
+</section>
+{% endblock %}

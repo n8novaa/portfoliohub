@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from accounts.models import Profile
+from accounts.models import Profile, Education
 from projects.models import Project
 
 def home(request):
@@ -29,5 +29,13 @@ def skills(request):
     return render(request, "pages/skills.html", {
         "profile": profile,
         "skills_list": skills_list,
+    })
+
+def education_page(request):
+    profile = Profile.objects.first()
+    education_list = profile.education.all() if profile else []
+
+    return render(request, "pages/education.html", {
+        "education_list": education_list
     })
 
