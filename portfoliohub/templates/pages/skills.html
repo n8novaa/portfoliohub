@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Home | Portfolio{% endblock %}
+
+{% block content %}
+
+<section id="skills-page">
+    <h1>Skills</h1>
+
+    {% if skills_list %}
+        <ul>
+            {% for skill in skills_list %}
+                <li>{{ skill }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No skills listed yet.</p>
+    {% endif %}
+</section>
+
+{% endblock %}
+

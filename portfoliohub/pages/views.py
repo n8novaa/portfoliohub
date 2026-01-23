@@ -19,3 +19,15 @@ def about(request):
         "profile": profile
     })
 
+def skills(request):
+    profile = Profile.objects.first()
+
+    skills_list = []
+    if profile and profile.skills:
+        skills_list = [s.strip() for s in profile.skills.split(",")]
+
+    return render(request, "pages/skills.html", {
+        "profile": profile,
+        "skills_list": skills_list,
+    })
+
