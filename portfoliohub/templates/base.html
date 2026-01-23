@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Portfolio{% endblock %}</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+
+    <!-- NAVBAR (GLOBAL) -->
+    <nav class="nav">
+        <div class="nav-brand">
+            <a href="/">Portfolio</a>
+        </div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/projects/">Projects</a>
+        </div>
+    </nav>
+
+    <hr>
+
+    <!-- MAIN CONTENT -->
+    <main class="container">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

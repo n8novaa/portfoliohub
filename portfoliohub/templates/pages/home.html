@@ -1,57 +1,56 @@
+{% extends "base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Portfolio</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
-</head>
-<body>
-    <nav>
-        <a href="/">Home</a>
-        <a href="/projects/">Projects</a>
-    </nav>
-    <h1>{{profile.full_name}}</h1>
-    <h3>{{profile.headline}}</h3>
+{% block title %}Home | Portfolio{% endblock %}
 
-    <p>{{profile.bio}}</p>
+{% block content %}
 
-    <h4>Skills</h4>
-    <p>{{profile.skills}}</p>
+    <h1>{{ profile.full_name }}</h1>
+    <h3>{{ profile.headline }}</h3>
+
+    <p>{{ profile.bio }}</p>
 
     <h2>Featured Projects</h2>
 
-{% if featured_projects %}
-  <ul>
-    {% for project in featured_projects %}
-      {% if project.slug %}
+    {% if featured_projects %}
+        <ul>
+        {% for project in featured_projects %}
+            <li>
+                <a href="{% url 'project_detail' project.slug %}">
+                    {{ project.title }}
+                </a>
+                — {{ project.short_description }}
+            </li>
+        {% endfor %}
+        </ul>
+
+    {% else %}
+        <p>No featured projects yet.</p>
+    {% endif %}
+
+    <h2>Connect</h2>
+
+<ul>
+    <li>
+        <a href="mailto:{{ profile.email }}">
+            {{ profile.email }}
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ profile.github_url }}" target="_blank">
+            GitHub
+        </a>
+    </li>
+
+    {% if profile.linkedin_url %}
         <li>
-          <a href="{% url 'project_detail' project.slug %}">
-            {{ project.title }}
-          </a>
-          — {{ project.short_description }}
+            <a href="{{ profile.linkedin_url }}" target="_blank">
+                LinkedIn
+            </a>
         </li>
-      {% else %}
-        <li>{{ project.title }} (slug missing)</li>
-      {% endif %}
-    {% endfor %}
-  </ul>
-{% else %}
-  <p>No featured projects yet.</p>
-{% endif %}
+    {% endif %}
+</ul>
 
 
-    <h4>Connect</h4>
-    <ul>
-        <li><a href="mailto:{{profile.email}}">Email</a></li>
-        <li><a href="{{profile.github_url}}">Github</a></li>
-        <li><a href="{{profile.linkedin_url}}">LinkedIn</a></li>
-    </ul>
-    
-    <script src="{% static 'js/main.js' %}"></script>
 
-</body>
-</html>
+{% endblock %}
