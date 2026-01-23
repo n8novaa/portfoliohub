@@ -3,54 +3,42 @@
 {% block title %}Home | Portfolio{% endblock %}
 
 {% block content %}
-
+    
+{% if profile %}
+<section id="hero">
     <h1>{{ profile.full_name }}</h1>
-    <h3>{{ profile.headline }}</h3>
 
-    <p>{{ profile.bio }}</p>
+    <h2>{{ profile.headline }}</h2>
 
-    <h2>Featured Projects</h2>
+    <p>
+        Building clean, scalable Django web applications.
+    </p>
+
+    <section id="projects">
+    <h2>Projects</h2>
 
     {% if featured_projects %}
-        <ul>
         {% for project in featured_projects %}
-            <li>
-                <a href="{% url 'project_detail' project.slug %}">
-                    {{ project.title }}
-                </a>
-                — {{ project.short_description }}
-            </li>
+            <div>
+                <h3>
+                    <a href="{% url 'project_detail' project.slug %}">
+                        {{ project.title }}
+                    </a>
+                </h3>
+                <p>{{ project.short_description }}</p>
+            </div>
         {% endfor %}
-        </ul>
 
+        <a href="/projects/">View all projects</a>
     {% else %}
-        <p>No featured projects yet.</p>
+        <p>No projects to show yet.</p>
     {% endif %}
 
-    <h2>Connect</h2>
 
-<ul>
-    <li>
-        <a href="mailto:{{ profile.email }}">
-            {{ profile.email }}
-        </a>
-    </li>
+   
 
-    <li>
-        <a href="{{ profile.github_url }}" target="_blank">
-            GitHub
-        </a>
-    </li>
-
-    {% if profile.linkedin_url %}
-        <li>
-            <a href="{{ profile.linkedin_url }}" target="_blank">
-                LinkedIn
-            </a>
-        </li>
-    {% endif %}
-</ul>
-
+</section>
+{% endif %}
 
 
 {% endblock %}
