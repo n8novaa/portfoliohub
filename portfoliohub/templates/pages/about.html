@@ -3,13 +3,33 @@
 {% block title %}About | Portfolio{% endblock %}
 
 {% block content %}
-<section id="about-page">
-    <h1>About Me</h1>
+<section id="about-page" class="container" style="max-width: 800px; padding-top: var(--space-xl); padding-bottom: var(--space-xl);">
+    <div class="text-center mb-5">
+        <h1 style="margin-bottom: var(--space-xs);">About Me</h1>
+        <p class="text-muted">{{ profile.headline }}</p>
+    </div>
 
     {% if profile %}
-        <p>{{ profile.bio }}</p>
+        <div class="about-content" style="font-size: 1.125rem; line-height: 1.8; color: var(--text-main); margin-bottom: var(--space-lg);">
+            <p>{{ profile.bio|linebreaks }}</p>
+        </div>
+
+        <div class="social-links text-center pt-4" style="border-top: 1px solid var(--border-light);">
+            <h3 style="font-size: 1.25rem; margin-bottom: var(--space-md);">Connect on</h3>
+            <div style="display: flex; gap: var(--space-md); justify-content: center;">
+                {% if profile.github_url %}
+                    <a href="{{ profile.github_url }}" target="_blank" class="btn btn-outline">GitHub</a>
+                {% endif %}
+                
+                {% if profile.linkedin_url %}
+                    <a href="{{ profile.linkedin_url }}" target="_blank" class="btn btn-outline">LinkedIn</a>
+                {% endif %}
+                
+                <a href="mailto:{{ profile.email }}" class="btn btn-primary">Email Me</a>
+            </div>
+        </div>
     {% else %}
-        <p>About information not available.</p>
+        <p class="text-center">About information not available.</p>
     {% endif %}
 </section>
 {% endblock %}
