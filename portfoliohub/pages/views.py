@@ -39,3 +39,13 @@ def education_page(request):
         "education_list": education_list
     })
 
+
+
+def connect_page(request):
+    profile = Profile.objects.first()
+
+    return render(request, "pages/connect.html", {
+        "profile": profile
+    })
+
+

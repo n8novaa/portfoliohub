@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Connect | Portfolio{% endblock %}
+
+{% block content %}
+<section id="connect-page">
+    <h1>Connect</h1>
+
+    {% if profile %}
+        <p>Email:
+            <a href="mailto:{{ profile.email }}">
+                {{ profile.email }}
+            </a>
+        </p>
+
+        {% if profile.github_url %}
+            <p>
+                <a href="{{ profile.github_url }}" target="_blank">
+                    GitHub
+                </a>
+            </p>
+        {% endif %}
+
+        {% if profile.linkedin_url %}
+            <p>
+                <a href="{{ profile.linkedin_url }}" target="_blank">
+                    LinkedIn
+                </a>
+            </p>
+        {% endif %}
+
+        {% if profile.twitter_url %}
+            <p>
+                <a href="{{ profile.twitter_url }}" target="_blank">
+                    Twitter
+                </a>
+            </p>
+        {% endif %}
+    {% else %}
+        <p>Profile information not available.</p>
+    {% endif %}
+</section>
+{% endblock %}
