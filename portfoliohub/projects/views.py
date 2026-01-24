@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Project
 
 def project_list(request):
@@ -8,9 +8,13 @@ def project_list(request):
         })
 
 def project_detail(request, slug):
-    project = Project.objects.get(slug=slug)
-    return render(request, 'projects/project_detail.html', {
-        'project': project
-        })
+    project = get_object_or_404(Project, slug=slug)
+
+    formatted_title = project.title.replace(" ", "-")
+
+    return render(request, "projects/project_detail.html", {
+        "project": project,
+        "formatted_title": formatted_title,
+    })
 
 

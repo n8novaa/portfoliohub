@@ -22,4 +22,10 @@ class Project(models.Model):
     def __str__(self):
         return self.title
 
+    @property
+    def tech_list(self):
+        if self.tech_stack:
+            return [tech.strip() for tech in self.tech_stack.split(',')]
+        return []
+
 

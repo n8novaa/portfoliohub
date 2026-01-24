@@ -25,8 +25,15 @@
                         <p class="card-text">{{ project.short_description }}</p>
                         
                         <div class="card-meta">
-                            {% if project.tech_stack %}
-                                <span class="tech-stack">{{ project.tech_stack|truncatechars:40 }}</span>
+                            {% if project.tech_list %}
+                                <div class="tech-stack-preview">
+                                    {% for tech in project.tech_list|slice:":3" %}
+                                        <span class="skill-tag-sm">{{ tech }}</span>
+                                    {% endfor %}
+                                    {% if project.tech_list|length > 3 %}
+                                        <span class="more-tag">+{{ project.tech_list|length|add:"-3" }}</span>
+                                    {% endif %}
+                                </div>
                             {% endif %}
                             <a href="{% url 'project_detail' project.slug %}" class="card-link">View Details &rarr;</a>
                         </div>

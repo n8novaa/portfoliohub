@@ -565,3 +565,81 @@ section {
 .card-link:hover {
     text-decoration: underline;
 }
+
+/* =========================================
+   9. PROJECT DETAIL (Step 7)
+   ========================================= */
+.back-link {
+    display: inline-block;
+    margin-bottom: var(--space-lg);
+    color: var(--text-muted);
+    font-weight: 500;
+    transition: color var(--transition-fast);
+}
+
+.back-link:hover {
+    color: var(--primary);
+    transform: translateX(-4px); 
+}
+
+.project-header {
+    margin-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: var(--space-lg);
+}
+
+.project-title {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-xs);
+    line-height: 1.2;
+}
+
+.project-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.project-content h3 {
+    margin-top: var(--space-lg);
+    font-size: 1.5rem;
+    color: var(--text-main);
+}
+
+.text-body {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--text-main);
+}
+
+.tech-stack-section {
+    margin-top: var(--space-lg);
+}
+
+.project-links {
+    margin-top: var(--space-xl);
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+}
+
+.tech-stack-preview {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.skill-tag-sm {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.6rem;
+    background-color: var(--bg-body);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    color: var(--text-muted);
+}
+
+.more-tag {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
