@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Portfolio{% endblock %}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,21 +15,28 @@
 <body>
 
     <!-- NAVBAR (GLOBAL) -->
-<nav class="nav">
-    <div class="nav-brand">
-        <a href="{% url 'home' %}">Portfolio</a>
-    </div>
+    <!-- NAVBAR (GLOBAL) -->
+    <header class="header">
+        <div class="container navbar">
+            <a href="{% url 'home' %}" class="nav-brand">Portfolio</a>
 
-    <div class="nav-links">
-        <a href="{% url 'home' %}">Home</a>
-        <a href="{% url 'about' %}">About</a>
-        <a href="{% url 'skills' %}">Skills</a>
-        <a href="{% url 'project_list' %}">Projects</a>
-        <a href="{% url 'experience' %}">Experience</a>
-        <a href="{% url 'education' %}">Education</a>
-        <a href="{% url 'connect' %}">Connect</a>
-    </div>
-</nav>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+
+            <nav class="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+                    <li><a href="{% url 'about' %}" class="nav-link">About</a></li>
+                    <li><a href="{% url 'skills' %}" class="nav-link">Skills</a></li>
+                    <li><a href="{% url 'project_list' %}" class="nav-link">Projects</a></li>
+                    <li><a href="{% url 'experience' %}" class="nav-link">Experience</a></li>
+                    <li><a href="{% url 'education' %}" class="nav-link">Education</a></li>
+                    <li><a href="{% url 'connect' %}" class="btn btn-primary nav-cta">Connect</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
 
 
