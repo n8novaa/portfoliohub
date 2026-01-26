@@ -3,32 +3,43 @@
 {% block title %}Experience | Portfolio{% endblock %}
 
 {% block content %}
-<section id="experience-page">
-    <h1>Experience</h1>
+<section id="experience-page" class="container" style="max-width: 800px; padding-top: var(--space-xl); padding-bottom: var(--space-xl);">
+    <div class="text-center mb-5">
+        <h1 style="margin-bottom: var(--space-md);">Experience</h1>
+        <p class="text-muted">My professional journey and career history.</p>
+    </div>
 
     {% if experiences %}
-        {% for exp in experiences %}
-            <article>
-                <h2>{{ exp.title }}</h2>
-
-                {% if exp.organization %}
-                    <p><strong>{{ exp.organization }}</strong></p>
-                {% endif %}
-
-                <p>
-                    {{ exp.start_date|date:"M Y" }} —
-                    {% if exp.is_current %}
-                        Present
-                    {% elif exp.end_date %}
-                        {{ exp.end_date|date:"M Y" }}
-                    {% endif %}
-                </p>
-
-                <p>{{ exp.description }}</p>
-            </article>
-        {% endfor %}
+        <div class="timeline">
+            {% for exp in experiences %}
+                <div class="timeline-item {% if exp.is_current %}timeline-current{% endif %}">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <div class="timeline-title-group">
+                                <h2 class="timeline-title">{{ exp.title }}</h2>
+                                {% if exp.organization %}
+                                    <span class="timeline-org">{{ exp.organization }}</span>
+                                {% endif %}
+                            </div>
+                            <span class="timeline-date">
+                                {{ exp.start_date|date:"F Y" }} —
+                                {% if exp.is_current %}
+                                    <span class="text-primary">Present</span>
+                                {% elif exp.end_date %}
+                                    {{ exp.end_date|date:"F Y" }}
+                                {% else %}
+                                    ?
+                                {% endif %}
+                            </span>
+                        </div>
+                        <p class="timeline-desc">{{ exp.description|linebreaksbr }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     {% else %}
-        <p>No experience added yet.</p>
+        <p class="text-center">No experience added yet.</p>
     {% endif %}
 </section>
 {% endblock %}
