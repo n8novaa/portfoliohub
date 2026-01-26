@@ -3,19 +3,33 @@
 {% block title %}Education | Portfolio{% endblock %}
 
 {% block content %}
-<section id="education-page">
-    <h1>Education</h1>
+<section id="education-page" class="container" style="max-width: 800px; padding-top: var(--space-xl); padding-bottom: var(--space-xl);">
+    <div class="text-center mb-5">
+        <h1 style="margin-bottom: var(--space-md);">Education</h1>
+        <p class="text-muted">Academic background and certifications.</p>
+    </div>
 
     {% if education_list %}
-        {% for edu in education_list %}
-            <article>
-                <h2>{{ edu.degree }}</h2>
-                <p><strong>{{ edu.institution }}</strong></p>
-                <p>{{ edu.start_year }} – {{ edu.end_year }}</p>
-            </article>
-        {% endfor %}
+        <div class="timeline">
+            {% for edu in education_list %}
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <div class="timeline-title-group">
+                                <h2 class="timeline-title">{{ edu.degree }}</h2>
+                                <span class="timeline-org">{{ edu.institution }}</span>
+                            </div>
+                            <span class="timeline-date">
+                                {{ edu.start_year }} – {{ edu.end_year }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     {% else %}
-        <p>No education details added yet.</p>
+        <p class="text-center">No education details added yet.</p>
     {% endif %}
 </section>
 {% endblock %}
