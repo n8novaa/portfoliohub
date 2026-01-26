@@ -12,7 +12,7 @@
     {% if experiences %}
         <div class="timeline">
             {% for exp in experiences %}
-                <div class="timeline-item {% if exp.is_current %}timeline-current{% endif %}">
+                <div class="timeline-item {% if exp.is_current %}timeline-current{% endif %} animate-fade-in-up">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <div class="timeline-header">

@@ -8,7 +8,7 @@
 {% if profile %}
 <section class="hero">
     <div class="container hero-grid">
-        <div class="hero-content">
+        <div class="hero-content animate-fade-in-up">
             <h1 class="hero-title">
                 Hello, I'm <span class="text-primary">{{ profile.full_name }}</span>.
             </h1>
@@ -23,7 +23,7 @@
             </div>
         </div>
         
-        <div class="hero-visual">
+        <div class="hero-visual animate-fade-in-up stagger-2">
             <div class="hero-image-wrapper">
                 <img src="{% static 'images/hero_illustration.png' %}" alt="Abstract Design Illustration" class="hero-img">
             </div>
@@ -37,7 +37,7 @@
     {% if featured_projects %}
         <div class="projects-grid">
             {% for project in featured_projects %}
-                <div class="project-card">
+                <div class="project-card animate-fade-in-up">
                     <h3>
                         <a href="{% url 'project_detail' project.slug %}">
                             {{ project.title }}

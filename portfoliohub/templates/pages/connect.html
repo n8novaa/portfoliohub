@@ -11,7 +11,7 @@
 
     {% if profile %}
         <div class="connect-grid">
-            <a href="mailto:{{ profile.email }}" class="connect-card card-email">
+            <a href="mailto:{{ profile.email }}" class="connect-card card-email animate-fade-in-up stagger-1">
                 <div class="connect-icon">✉️</div>
                 <div class="connect-info">
                     <h3>Email</h3>
@@ -20,7 +20,7 @@
             </a>
 
             {% if profile.linkedin_url %}
-                <a href="{{ profile.linkedin_url }}" target="_blank" class="connect-card card-linkedin">
+                <a href="{{ profile.linkedin_url }}" target="_blank" class="connect-card card-linkedin animate-fade-in-up stagger-2">
                     <div class="connect-icon">💼</div>
                     <div class="connect-info">
                         <h3>LinkedIn</h3>
@@ -30,7 +30,7 @@
             {% endif %}
 
             {% if profile.github_url %}
-                <a href="{{ profile.github_url }}" target="_blank" class="connect-card card-github">
+                <a href="{{ profile.github_url }}" target="_blank" class="connect-card card-github animate-fade-in-up stagger-3">
                     <div class="connect-icon">💻</div>
                     <div class="connect-info">
                         <h3>GitHub</h3>
@@ -40,7 +40,7 @@
             {% endif %}
 
             {% if profile.twitter_url %}
-                <a href="{{ profile.twitter_url }}" target="_blank" class="connect-card card-twitter">
+                <a href="{{ profile.twitter_url }}" target="_blank" class="connect-card card-twitter animate-fade-in-up stagger-4">
                     <div class="connect-icon">🐦</div>
                     <div class="connect-info">
                         <h3>Twitter</h3>
