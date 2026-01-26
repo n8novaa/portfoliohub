@@ -3,41 +3,54 @@
 {% block title %}Connect | Portfolio{% endblock %}
 
 {% block content %}
-<section id="connect-page">
-    <h1>Connect</h1>
+<section id="connect-page" class="container" style="max-width: 700px; padding-top: var(--space-xl); padding-bottom: var(--space-xl);">
+    <div class="text-center mb-5">
+        <h1 style="margin-bottom: var(--space-md);">Let's Connect</h1>
+        <p class="text-muted">I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.</p>
+    </div>
 
     {% if profile %}
-        <p>Email:
-            <a href="mailto:{{ profile.email }}">
-                {{ profile.email }}
+        <div class="connect-grid">
+            <a href="mailto:{{ profile.email }}" class="connect-card card-email">
+                <div class="connect-icon">✉️</div>
+                <div class="connect-info">
+                    <h3>Email</h3>
+                    <p>{{ profile.email }}</p>
+                </div>
             </a>
-        </p>
 
-        {% if profile.github_url %}
-            <p>
-                <a href="{{ profile.github_url }}" target="_blank">
-                    GitHub
+            {% if profile.linkedin_url %}
+                <a href="{{ profile.linkedin_url }}" target="_blank" class="connect-card card-linkedin">
+                    <div class="connect-icon">💼</div>
+                    <div class="connect-info">
+                        <h3>LinkedIn</h3>
+                        <p>Professional Profile</p>
+                    </div>
                 </a>
-            </p>
-        {% endif %}
+            {% endif %}
 
-        {% if profile.linkedin_url %}
-            <p>
-                <a href="{{ profile.linkedin_url }}" target="_blank">
-                    LinkedIn
+            {% if profile.github_url %}
+                <a href="{{ profile.github_url }}" target="_blank" class="connect-card card-github">
+                    <div class="connect-icon">💻</div>
+                    <div class="connect-info">
+                        <h3>GitHub</h3>
+                        <p>Code Portfolio</p>
+                    </div>
                 </a>
-            </p>
-        {% endif %}
+            {% endif %}
 
-        {% if profile.twitter_url %}
-            <p>
-                <a href="{{ profile.twitter_url }}" target="_blank">
-                    Twitter
+            {% if profile.twitter_url %}
+                <a href="{{ profile.twitter_url }}" target="_blank" class="connect-card card-twitter">
+                    <div class="connect-icon">🐦</div>
+                    <div class="connect-info">
+                        <h3>Twitter</h3>
+                        <p>Thoughts & Updates</p>
+                    </div>
                 </a>
-            </p>
-        {% endif %}
+            {% endif %}
+        </div>
     {% else %}
-        <p>Profile information not available.</p>
+        <p class="text-center">Contact information not available.</p>
     {% endif %}
 </section>
 {% endblock %}

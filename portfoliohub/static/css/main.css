@@ -769,3 +769,59 @@ section {
     line-height: 1.7;
     font-size: 1.05rem;
 }
+
+/* =========================================
+   11. CONNECT (Step 10)
+   ========================================= */
+.connect-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+}
+
+.connect-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    transition: all var(--transition-fast);
+    text-decoration: none; /* Ensure no underline on the card itself */
+}
+
+.connect-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    border-color: var(--primary);
+}
+
+.connect-icon {
+    font-size: 2rem;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-body);
+    border-radius: 50%;
+    transition: transform var(--transition-fast);
+}
+
+.connect-card:hover .connect-icon {
+    transform: scale(1.1);
+}
+
+.connect-info h3 {
+    font-size: 1.125rem;
+    margin-bottom: 0.25rem;
+    color: var(--text-main);
+}
+
+.connect-info p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 0;
+}
