@@ -8,7 +8,7 @@ import { cn } from "../utils/cn";
 
 const navLinks = [
   { id: "home", title: "Home" },
-  { id: "about", title: "Skills" },
+  { id: "skills", title: "Skills" },
   { id: "work", title: "Projects" },
   { id: "experience", title: "Experience" },
   { id: "education", title: "Education" },
@@ -32,6 +32,8 @@ export default function Navbar({ profile }: { profile: Profile }) {
       const viewportCenter = window.innerHeight / 3;
 
       let currentActive = "";
+      
+
       for (const section of sectionElements) {
         const rect = section.getBoundingClientRect();
         if (rect.top <= viewportCenter && rect.bottom >= viewportCenter) {

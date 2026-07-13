@@ -4,9 +4,10 @@ import { getProfile, getProjects, getExperiences, getEducation } from "./api/ser
 import type { Profile, Project, Experience, Education } from "./types";
 
 import Navbar from "./components/navbar";
-import Hero from "./components/hero";
-import About from "./components/about";
+import Home from "./components/home";
 import Loader from "./components/loader";
+
+const Skills = lazy(() => import("./components/skills"));
 
 const ExperienceSection = lazy(() => import("./components/experience"));
 const EducationSection = lazy(() => import("./components/education"));
@@ -43,9 +44,9 @@ const App = () => {
     <BrowserRouter>
       <div className="relative z-0 bg-background text-slate-100 min-h-screen">
         <Navbar profile={profile} />
-        <Hero profile={profile} />
-        <About profile={profile} />
+        <Home profile={profile} />
         <Suspense fallback={null}>
+          <Skills profile={profile} />
           <Works projects={projects} />
           <ExperienceSection experiences={experiences} />
           <EducationSection education={education} />
