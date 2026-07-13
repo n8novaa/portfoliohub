@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { getProfile, getProjects, getExperiences, getEducation } from "./api/services";
 import type { Profile, Project, Experience, Education } from "./types";
@@ -6,11 +6,12 @@ import type { Profile, Project, Experience, Education } from "./types";
 import Navbar from "./components/navbar";
 import Hero from "./components/hero";
 import About from "./components/about";
-import ExperienceSection from "./components/experience";
-import EducationSection from "./components/education";
-import Works from "./components/works";
-import Contact from "./components/contact";
 import Loader from "./components/loader";
+
+const ExperienceSection = lazy(() => import("./components/experience"));
+const EducationSection = lazy(() => import("./components/education"));
+const Works = lazy(() => import("./components/works"));
+const Contact = lazy(() => import("./components/contact"));
 
 const App = () => {
   const [profile, setProfile] = useState<Profile | null>(null);
@@ -44,10 +45,12 @@ const App = () => {
         <Navbar profile={profile} />
         <Hero profile={profile} />
         <About profile={profile} />
-        <ExperienceSection experiences={experiences} />
-        {education.length > 0 && <EducationSection education={education} />}
-        <Works projects={projects} />
-        <Contact profile={profile} />
+        <Suspense fallback={null}>
+          <Works projects={projects} />
+          <ExperienceSection experiences={experiences} />
+          <EducationSection education={education} />
+          <Contact profile={profile} />
+        </Suspense>
       </div>
     </BrowserRouter>
   );

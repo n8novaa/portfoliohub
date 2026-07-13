@@ -1,0 +1,6 @@
+src/components/ui/HeroBackground.tsx(55,9): error TS2322: Type '{ className: string; colors: string[]; speed: number; backgroundColor: string; }' is not assignable to type 'IntrinsicAttributes & MeshGradientProps'.
+  Property 'backgroundColor' does not exist on type 'IntrinsicAttributes & MeshGradientProps'.
+src/components/ui/HeroBackground.tsx(63,9): error TS2322: Type '{ className: string; colors: string[]; speed: number; wireframe: boolean; backgroundColor: string; }' is not assignable to type 'IntrinsicAttributes & MeshGradientProps'.
+  Property 'wireframe' does not exist on type 'IntrinsicAttributes & MeshGradientProps'.
+src/components/ui/HeroBackground.tsx(78,15): error TS2322: Type '{ colors: string[]; colorBack: string; speed: number; roundness: number; thickness: number; softness: number; intensity: number; spotsPerColor: number; spotSize: number; pulse: number; smoke: number; ... 4 more ...; style: { ...; }; }' is not assignable to type 'IntrinsicAttributes & PulsingBorderProps'.
+  Property 'spotsPerColor' does not exist on type 'IntrinsicAttributes & PulsingBorderProps'.
