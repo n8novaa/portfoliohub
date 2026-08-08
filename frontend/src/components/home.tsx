@@ -7,7 +7,8 @@ import {
   Brain,
   Sparkles,
   Terminal,
-  Download
+  Download,
+  Briefcase
 } from "lucide-react";
 
 import type { Profile } from "../types";
@@ -24,6 +25,37 @@ export default function Home({ profile }: { profile: Profile }) {
   const names = profile.full_name?.split(" ") || [];
   const firstName = names[0] || "Creative";
   const lastName = names.slice(1).join(" ") || "Developer";
+
+  const handleResumeDownload = async () => {
+  if (!profile.resume) return;
+
+  try {
+    const res = await fetch(profile.resume);
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch resume: ${res.status}`);
+    }
+
+    const blob = await res.blob();
+
+    const blobUrl = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+
+    link.href = blobUrl;
+    link.download = `${profile.full_name?.replace(/\s+/g, "_") || "resume"}.pdf`;
+
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    URL.revokeObjectURL(blobUrl);
+  } catch (error) {
+    console.error("Resume download failed:", error);
+
+    window.open(profile.resume, "_blank");
+  }
+};
 
   const containerVars: Variants = {
     hidden: { opacity: 0 },
@@ -246,9 +278,29 @@ export default function Home({ profile }: { profile: Profile }) {
                 Discover
               </p>
             </motion.div>
-            <motion.h2 variants={itemVars} className="font-sans text-white font-bold text-4xl sm:text-5xl md:text-6xl mb-8 leading-tight">
+            <motion.h2 variants={itemVars} className="font-sans text-white font-bold text-4xl sm:text-5xl md:text-6xl mb-6 leading-tight">
               About Me.
             </motion.h2>
+
+            {/* Work Status Badge */}
+            {(() => {
+              const statusMap = {
+                open_to_work: { label: "Open to Work", color: "emerald", dot: "bg-emerald-400", bg: "bg-emerald-500/10", border: "border-emerald-500/30", text: "text-emerald-400" },
+                employed: { label: "Currently Working", color: "sky", dot: "bg-sky-400", bg: "bg-sky-500/10", border: "border-sky-500/30", text: "text-sky-400" },
+                freelancing: { label: "Available for Freelance", color: "amber", dot: "bg-amber-400", bg: "bg-amber-500/10", border: "border-amber-500/30", text: "text-amber-400" },
+              };
+              const s = statusMap[profile.work_status] ?? statusMap["open_to_work"];
+              return (
+                <motion.div variants={itemVars} className={`inline-flex items-center gap-2.5 px-4 py-2 rounded-full border ${s.bg} ${s.border} mb-8 w-fit`}>
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${s.dot} opacity-75`} />
+                    <span className={`relative inline-flex rounded-full h-2.5 w-2.5 ${s.dot}`} />
+                  </span>
+                  <Briefcase size={13} className={s.text} />
+                  <span className={`text-sm font-semibold tracking-wide ${s.text}`}>{s.label}</span>
+                </motion.div>
+              );
+            })()}
             
             <motion.div variants={itemVars} className="prose prose-invert prose-lg text-slate-300 font-light leading-relaxed mb-10">
               {profile.bio.split('\n').map((paragraph, idx) => (
@@ -257,20 +309,24 @@ export default function Home({ profile }: { profile: Profile }) {
             </motion.div>
 
             <motion.div variants={itemVars} className="flex flex-wrap gap-6">
-              <button className="group flex items-center justify-center gap-3 bg-white text-background px-6 py-3 rounded-full font-bold transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-glow">
-                <Download size={18} />
-                Download Resume
-              </button>
-              <div className="flex gap-8">
-                <div className="flex flex-col">
-                  <span className="text-3xl font-black text-white">3+</span>
-                  <span className="text-sm font-medium text-slate-500 uppercase tracking-wider">Years Exp</span>
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-3xl font-black text-white">20+</span>
-                  <span className="text-sm font-medium text-slate-500 uppercase tracking-wider">Projects</span>
-                </div>
-              </div>
+              {profile.resume ? (
+                <button
+                  onClick={handleResumeDownload}
+                  className="group flex items-center justify-center gap-3 bg-white text-background px-6 py-3 rounded-full font-bold transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-glow"
+                >
+                  <Download size={18} />
+                  Download Resume
+                </button>
+              ) : (
+                <button
+                  disabled
+                  className="flex items-center justify-center gap-3 bg-white/10 text-slate-500 px-6 py-3 rounded-full font-bold cursor-not-allowed border border-white/10"
+                  title="No resume uploaded yet"
+                >
+                  <Download size={18} />
+                  Download Resume
+                </button>
+              )}
             </motion.div>
           </motion.div>
 

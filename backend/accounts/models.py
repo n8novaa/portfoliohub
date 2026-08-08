@@ -1,6 +1,12 @@
 from django.db import models
 
 class Profile(models.Model):
+    WORK_STATUS_CHOICES = [
+        ("open_to_work", "Open to Work"),
+        ("employed", "Currently Working"),
+        ("freelancing", "Available for Freelance"),
+    ]
+
     full_name = models.CharField(max_length=100)
     headline = models.CharField(max_length=150)
     bio = models.TextField()
@@ -8,6 +14,17 @@ class Profile(models.Model):
     email = models.EmailField()
     github_url = models.URLField()
     linkedin_url = models.URLField(blank=True)
+    work_status = models.CharField(
+        max_length=20,
+        choices=WORK_STATUS_CHOICES,
+        default="open_to_work",
+    )
+    resume = models.FileField(
+        upload_to="resumes/",
+        blank=True,
+        null=True,
+        help_text="Upload your CV/Resume (PDF recommended)"
+    )
 
     def __str__(self):
         return self.full_name

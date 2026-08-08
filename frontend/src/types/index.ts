@@ -7,6 +7,8 @@ export interface Profile {
   email: string;
   github_url: string;
   linkedin_url: string;
+  work_status: "open_to_work" | "employed" | "freelancing";
+  resume: string | null;
 }
 
 export interface Project {
