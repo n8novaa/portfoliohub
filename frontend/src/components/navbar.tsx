@@ -82,15 +82,24 @@ export default function Navbar({ profile }: { profile: Profile }) {
             window.scrollTo({ top: 0, behavior: "smooth" });
           }}
         >
-          <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-primary to-cyanGlow flex items-center justify-center text-white font-bold text-sm shadow-glow group-hover:scale-110 transition-transform duration-300">
-            {profile.full_name?.charAt(0) || "P"}
+          {/* Logo */}
+          <div className="relative flex items-center justify-center w-9 h-9 shrink-0">
+            <img
+              src="/logo.png"
+              alt="Basil K Paul logo"
+              className="w-10 h-10 object-contain"
+            />
           </div>
-          <p className="text-white text-[16px] font-semibold cursor-pointer flex items-center tracking-wide font-sans">
-            {profile.full_name?.split(" ")[0] || "Portfolio"}
-            <span className="sm:inline hidden text-slate-400 font-normal ml-2 group-hover:text-white transition-colors duration-300">
+
+          {/* Name */}
+          <div className="flex items-baseline whitespace-nowrap">
+            <span className="text-white font-bold text-lg">
+              {profile.full_name?.split(" ")[0] || "Basil"}
+            </span>
+            <span className="text-slate-400 font-medium text-sm ml-1.5">
               / Dev
             </span>
-          </p>
+          </div>
         </Link>
 
         {/* Desktop links */}

@@ -3,7 +3,7 @@ from django.urls import path
 from .views import ProjectListAPIView
 from .views import ProfileAPIView
 from .views import ExperienceListAPIView
-from .views import EducationListAPIView
+from .views import EducationListAPIView, ContactAPIView
 
 urlpatterns = [
 
@@ -27,6 +27,12 @@ urlpatterns = [
         "education/",
         EducationListAPIView.as_view(),
         name="api-education",
+    ),
+
+    path(
+        "contact/",
+        ContactAPIView,
+        name="api-contact",
     ),
 
 ]

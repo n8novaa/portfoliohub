@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Mail, Send, Loader2, ArrowUpRight, ArrowUp } from "lucide-react";
 import { Github, Linkedin } from "./icons";
 import { toast } from "sonner";
-import emailjs from "@emailjs/browser";
+
 import type { Profile } from "../types";
 
 export default function Contact({ profile }: { profile: Profile }) {
@@ -15,41 +15,51 @@ export default function Contact({ profile }: { profile: Profile }) {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!form.name || !form.email || !form.message) {
-      toast.error("Please fill in all fields");
-      return;
+  e.preventDefault();
+
+  if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+    toast.error("Please fill in all fields");
+    return;
+  }
+
+  setLoading(true);
+
+  try {
+    const response = await fetch("http://127.0.0.1:8000/api/contact/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: form.name.trim(),
+        email: form.email.trim(),
+        message: form.message.trim(),
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "Failed to send message");
     }
-    
-    setLoading(true);
-    try {
-      // Trying to send email dynamically. If no configured env vars, it'll fail gracefully.
-      await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_default",
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_default",
-        {
-          from_name: form.name,
-          to_name: profile.full_name,
-          from_email: form.email,
-          to_email: profile.email,
-          message: form.message,
-        },
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "public_default"
-      );
-      toast.success("Message sent successfully! I'll get back to you soon.");
-      setForm({ name: "", email: "", message: "" });
-    } catch (error) {
-      console.warn("EmailJS not configured, simulating success.", error);
-      // Simulate success for UI purposes if EmailJS isn't configured by the user yet
-      setTimeout(() => {
-        toast.success("Message simulated successfully! Configure EmailJS to receive emails.");
-        setForm({ name: "", email: "", message: "" });
-        setLoading(false);
-      }, 1500);
-      return;
-    }
+
+    toast.success("Message sent successfully! I'll get back to you soon.");
+
+    setForm({
+      name: "",
+      email: "",
+      message: "",
+    });
+  } catch (error) {
+    console.error("Contact form error:", error);
+
+    toast.error(
+      "Unable to send your message. Please try again or email me directly."
+    );
+  } finally {
     setLoading(false);
-  };
+  }
+};
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
