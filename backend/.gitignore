@@ -7,3 +7,6 @@ db.sqlite3
 .vscode/
 .idea/
 media/
+portfolio_data.json
+portfolio_data_utf8.json
+portfolio_data_clean.json

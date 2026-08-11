@@ -30,6 +30,7 @@ export default function Home({ profile }: { profile: Profile }) {
   const handleResumeDownload = async () => {
   if (!profile.resume) return;
 
+  console.log("Resume URL:", profile.resume);
   try {
     const res = await fetch(profile.resume);
 

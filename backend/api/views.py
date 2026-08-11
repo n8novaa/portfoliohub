@@ -15,9 +15,11 @@ from rest_framework.decorators import api_view, throttle_classes
 from rest_framework.throttling import AnonRateThrottle
 from rest_framework.response import Response
 from rest_framework import status
-from django.core.mail import EmailMessage
+
 
 from django.conf import settings
+# pyrefly: ignore [missing-import]
+import sib_api_v3_sdk   
 
 
 class ProjectListAPIView(ListAPIView):
@@ -41,7 +43,6 @@ class EducationListAPIView(ListAPIView):
 
 @api_view(["POST"])
 @throttle_classes([AnonRateThrottle])
-
 def ContactAPIView(request):
     name = request.data.get("name", "").strip()
     email = request.data.get("email", "").strip()
@@ -53,20 +54,37 @@ def ContactAPIView(request):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
-    email_message = EmailMessage(
+    configuration = sib_api_v3_sdk.Configuration()
+    configuration.api_key["api-key"] = settings.BREVO_API_KEY
+
+    api_instance = sib_api_v3_sdk.TransactionalEmailsApi(
+        sib_api_v3_sdk.ApiClient(configuration)
+    )
+
+    email_data = sib_api_v3_sdk.SendSmtpEmail(
+        sender={
+            "email": settings.EMAIL_HOST_USER,
+            "name": "Portfolio Contact",
+        },
+        to=[
+            {
+                "email": settings.EMAIL_HOST_USER,
+            }
+        ],
+        reply_to={
+            "email": email,
+            "name": name,
+        },
         subject=f"Portfolio Contact: {name}",
-        body=(
+        text_content=(
             f"Name: {name}\n"
             f"Email: {email}\n\n"
             f"Message:\n{message}"
         ),
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        to=[settings.EMAIL_HOST_USER],
-        reply_to=[email],
     )
 
     try:
-        email_message.send(fail_silently=False)
+        api_instance.send_transac_email(email_data)
 
         return Response(
             {"message": "Message sent successfully."},

@@ -1,4 +1,6 @@
 from django.db import models
+# pyrefly: ignore [missing-import]
+from cloudinary_storage.storage import RawMediaCloudinaryStorage
 
 class Profile(models.Model):
     WORK_STATUS_CHOICES = [
@@ -22,6 +24,7 @@ class Profile(models.Model):
     )
     resume = models.FileField(
         upload_to="resumes/",
+        storage=RawMediaCloudinaryStorage(),
         blank=True,
         null=True,
         help_text="Upload your CV/Resume (PDF recommended)"
