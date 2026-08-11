@@ -4,7 +4,7 @@ if (!API_BASE_URL) {
 }
 
 export const apiClient = async (endpoint: string, options: RequestInit = {}) => {
-  const url = `${API_BASE_URL}${endpoint}`;
+  const url = `${API_BASE_URL.replace(/\/$/, "")}/${endpoint.replace(/^\//, "")}`;
   try {
     const response = await fetch(url, {
       ...options,
