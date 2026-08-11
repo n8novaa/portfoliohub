@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 
 import type { Profile } from "../types";
-import heroImg from "../assets/hero.png";
+
 
 const techIcons = [
   { icon: Code2, label: "React", delay: 0 },
@@ -22,6 +22,7 @@ const techIcons = [
 ];
 
 export default function Home({ profile }: { profile: Profile }) {
+  
   const names = profile.full_name?.split(" ") || [];
   const firstName = names[0] || "Creative";
   const lastName = names.slice(1).join(" ") || "Developer";
@@ -136,7 +137,7 @@ export default function Home({ profile }: { profile: Profile }) {
             </motion.h1>
 
             <motion.p variants={itemVars} className="max-w-xl text-slate-300 text-lg sm:text-xl font-light leading-relaxed mb-10">
-              Building scalable backend systems, modern web applications and AI-powered experiences using Django, React and Cloud technologies.
+              {profile.description}
             </motion.p>
 
             <motion.div variants={itemVars} className="flex flex-wrap gap-5">
@@ -345,10 +346,10 @@ export default function Home({ profile }: { profile: Profile }) {
             />
             
             <div className="relative w-full h-full rounded-[2rem] overflow-hidden shadow-2xl shadow-cyanGlow/10 border border-white/5">
-              <img 
-                 src={heroImg} 
-                 alt={profile.full_name || "Profile Picture"} 
-                 className="w-full h-full object-cover"
+              <img
+                src={profile.profile_image || undefined}
+                alt={profile.full_name || "Profile Picture"}
+                className="w-full h-full object-cover"
               />
             </div>
           </motion.div>

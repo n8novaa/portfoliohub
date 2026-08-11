@@ -2,6 +2,7 @@ export interface Profile {
   id: number;
   full_name: string;
   headline: string;
+  description: string;
   bio: string;
   skills: string;
   email: string;
@@ -9,6 +10,7 @@ export interface Profile {
   linkedin_url: string;
   work_status: "open_to_work" | "employed" | "freelancing";
   resume: string | null;
+  profile_image: string | null;
 }
 
 export interface Project {

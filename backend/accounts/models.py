@@ -9,6 +9,7 @@ class Profile(models.Model):
 
     full_name = models.CharField(max_length=100)
     headline = models.CharField(max_length=150)
+    description = models.TextField()
     bio = models.TextField()
     skills = models.TextField(help_text="comma-seperated skills")
     email = models.EmailField()
@@ -24,6 +25,13 @@ class Profile(models.Model):
         blank=True,
         null=True,
         help_text="Upload your CV/Resume (PDF recommended)"
+    )
+
+    profile_image = models.ImageField(
+        upload_to="profile/",
+        blank=True,
+        null=True,
+        help_text="Upload your profile photo"
     )
 
     def __str__(self):
