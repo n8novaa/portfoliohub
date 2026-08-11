@@ -11,7 +11,8 @@ from .serializers import ProfileSerializer, EducationSerializer
 from experience.models import Experience
 from .serializers import ExperienceSerializer
 
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, throttle_classes
+from rest_framework.throttling import AnonRateThrottle
 from rest_framework.response import Response
 from rest_framework import status
 from django.core.mail import EmailMessage
@@ -39,6 +40,8 @@ class EducationListAPIView(ListAPIView):
     serializer_class = EducationSerializer
 
 @api_view(["POST"])
+@throttle_classes([AnonRateThrottle])
+
 def ContactAPIView(request):
     name = request.data.get("name", "").strip()
     email = request.data.get("email", "").strip()
